@@ -2,6 +2,7 @@
 
 import os
 import tempfile
+import json
 
 from fabric.api import *
 from fabric.contrib.files import *

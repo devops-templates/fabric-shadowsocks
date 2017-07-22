@@ -19,7 +19,7 @@ Including:
 pip install fabric
 ```
 
-### Write a `fabfile.py`
+### [OPTION] Write a `fabfile.py`
 
 ```
 from fabric_templates.kcptun import *
@@ -36,5 +36,9 @@ Available commands:
     restart
     start
     stop
+
+# OR
+
+(ball) ➜  fabric-templates git:(master) ✗ fab -f fabric_templates/kcptun.py -l
 ```
 

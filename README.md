@@ -6,6 +6,7 @@ fabric templates for ubuntu 14.04+
 
 Including:
 
+* ubuntu (only allow authkey to login)
 * frp
 * kcptun
 * shadowsocks-libev

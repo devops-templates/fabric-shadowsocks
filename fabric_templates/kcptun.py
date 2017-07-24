@@ -11,12 +11,12 @@ def _systemd(action="start"):
 def install(tarball='https://github.com/xtaci/kcptun/releases/download/v20170525/kcptun-linux-amd64-20170525.tar.gz'):
     print _info("Downloading %s" % tarball)
     filename = os.path.basename(tarball)
-    sudo("mkdir -p /opt/kcptun/bin /opt/kcptun/conf && \
-            cd /opt/kcptun/bin  && \
-            wget %s && \
-            tar -zxvf %s && \
-            rm -f kcptun-* \
-            && chown -R root:root ./*" % (tarball, filename))
+    sudo("mkdir -p /opt/kcptun/bin /opt/kcptun/conf")
+    with cd("/opt/kcptun/bin"):
+        sudo("wget %s && \
+                tar -zxvf %s && \
+                rm -f kcptun-* && \
+                chown -R root:root ./*" % (tarball, filename))
 
 def config(listen, target, key,
         crypt="none", mtu="1200", mode="normal",

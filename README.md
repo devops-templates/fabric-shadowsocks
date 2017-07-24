@@ -7,6 +7,8 @@ fabric templates for ubuntu 14.04+
 Including:
 
 * ubuntu (only allow authkey to login)
+* docker-ce
+* docker-compose
 * frp
 * kcptun
 * shadowsocks-libev

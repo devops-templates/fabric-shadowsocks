@@ -14,7 +14,7 @@ def addgroup(group='fabric-sudoers'):
     local_path = tempfile.mktemp('.sudoers')
     with open(local_path, 'w+') as outputfile:
         outputfile.write(config)
-    remote_path = "/etc/sudoers.d/10fabric_sudoers"
+    remote_path = "/etc/sudoers.d/10fabric-sudoers"
     put(local_path, remote_path, mode="0440")
 
 def adduser(username='sa', group='fabric-sudoers'):

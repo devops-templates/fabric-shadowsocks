@@ -1,5 +1,4 @@
 #coding=utf-8
-
 import os
 import tempfile
 import json
@@ -18,7 +17,7 @@ def install():
     sudo("apt install shadowsocks-libev")
 
 def config(port, passwrod, method="aes-256-cfb",
-        obfs_opts="obfs=http;obfs-host=www.baidu.com"):
+        obfs_opts="obfs=http;obfs-host=www.bing.com"):
     template = dict(server="0.0.0.0",
             server_port=port,
             password=password,

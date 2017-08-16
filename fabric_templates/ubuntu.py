@@ -4,7 +4,7 @@ import tempfile
 from fabric.api import *
 from fabric.contrib.files import *
 
-def _read_pubkey(pubkey_filepath='server-ssh-key.pub'):
+def _read_pubkey(pubkey_filepath='vps-ssh-key.pub'):
     with open(pubkey_filepath, 'r') as f:
         return f.read()
 
@@ -31,7 +31,7 @@ def config_sshd():
 def config_apt():
     run('echo \'Acquire::ForceIPv4 "true";\' > /etc/apt/apt.conf.d/99force-ipv4')
 
-def upload_pubkey(username='sa', pubkey_filepath='server-ssh-key.pub'):
+def upload_pubkey(username='sa', pubkey_filepath='vps-ssh-key.pub'):
     ssh_dir = '/home/%s/.ssh' % username
     auth_keys_filepath = '%s/authorized_keys' % ssh_dir
     run('mkdir -p %s' % ssh_dir)
@@ -41,8 +41,8 @@ def upload_pubkey(username='sa', pubkey_filepath='server-ssh-key.pub'):
     append(auth_keys_filepath, _read_pubkey(pubkey_filepath))
 
 def init():
-    adduser()
     addgroup()
+    adduser()
     upload_pubkey()
     config_apt()
     config_sshd()

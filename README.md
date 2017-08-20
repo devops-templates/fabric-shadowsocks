@@ -13,6 +13,9 @@ Including:
 * kcptun
 * shadowsocks-libev
 * bbr(x86_64)
+* grafana
+* telgraf
+* influxdb
 
 ## Usage
 

@@ -11,6 +11,7 @@ def install():
     docker_ce.install()
     docker_compose.install()
     docker_shadowsocks_libev.install()
+    bbr.upgrade_kernel()
 
 def config(password='123456789'):
     bbr.config()
@@ -23,5 +24,4 @@ def setup():
     install()
     config()
     start()
-
 

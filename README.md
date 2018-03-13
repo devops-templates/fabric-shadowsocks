@@ -11,7 +11,7 @@ Including:
 * docker-compose
 * frp
 * kcptun
-* shadowsocks-libev
+* docker_shadowsocks-libev
 * bbr(x86_64)
 * grafana
 * telgraf

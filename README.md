@@ -48,3 +48,16 @@ Available commands:
 (ball) ➜  fabric-templates git:(master) ✗ fab -f fabric_templates/kcptun.py -l
 ```
 
+### Install SS on GCP
+
+```
+(ball) ➜  ~ fab -i ~/.ssh/vps-ssh-key -H sa@YOUT_SERVER_IP -f gcp.py setup
+
+```
+
+### Install SS on vulr
+
+```
+(ball) ➜  ~ fab -H root@YOUT_SERVER_IP -f vulr.py setup
+
+```

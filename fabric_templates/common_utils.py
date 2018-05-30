@@ -3,7 +3,7 @@ from fabric.api import *
 from fabric.contrib.files import *
 
 def install():
-    sudo('apt-get install -y git htop')
+    sudo('apt-get install -y git')
 
 
 

@@ -12,7 +12,7 @@ def install():
     docker_compose.install()
     docker_shadowsocks_libev.install()
 
-def config(password='123456789'):
+def config(password='YxjGRdC3o9LWQJyp'):
     bbr.config()
     docker_shadowsocks_libev.config(password)
 

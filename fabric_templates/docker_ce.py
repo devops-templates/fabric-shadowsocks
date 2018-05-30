@@ -7,13 +7,6 @@ from fabric.contrib.files import *
 from fabric.colors import green as _info
 
 def install():
-    # Uninstall old versions
-    sudo("apt-get remove docker docker-engine docker.io")
-    sudo("apt-get update")
-    # Only for ubuntu 14.04
-    # sudo("apt-get install -y \
-    #        linux-image-extra-$(uname -r) \
-    #        linux-image-extra-virtual")
     sudo("apt-get install -y \
             apt-transport-https \
             ca-certificates \

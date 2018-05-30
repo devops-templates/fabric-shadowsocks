@@ -13,7 +13,7 @@ def install():
     docker_shadowsocks_libev.install()
     bbr.upgrade_kernel()
 
-def config(password='123456789'):
+def config(password='uYnJo4WQc7keMmqQ'):
     bbr.config()
     docker_shadowsocks_libev.config(password)
 

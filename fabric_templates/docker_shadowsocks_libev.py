@@ -22,10 +22,9 @@ services:
 
 def install(port, password, method="aes-192-cfb"):
     sudo("mkdir -p /opt/shadowsocks/user-%s" % port)
-    config(port, password, method)
-    up(username)
 
 def config(port, password, method="aes-192-cfb"):
+    sudo("mkdir -p /opt/shadowsocks/user-%s" % port)
     remote_config_path = '/opt/shadowsocks/user-%s/docker-compose.yml' % port
     local_config_path = tempfile.mktemp('.yml')
     conffile_content = docker_compose_config.format(port, method, password)

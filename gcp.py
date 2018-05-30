@@ -24,7 +24,6 @@ def restart(port):
     docker_shadowsocks_libev.restart(port)
 
 def setup(port="10090", password="ubUAOMdPisCG9v26"):
-    install()
     config(port, password)
     start(port)
 

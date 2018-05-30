@@ -1,6 +1,6 @@
 # fabric-templates
 
-fabric templates for ubuntu 14.04+
+fabric templates for ubuntu 16.04
 
 ## Templates
 
@@ -51,7 +51,7 @@ Available commands:
 ### Install SS on GCP
 
 ```
-(ball) ➜  ~ fab -i ~/.ssh/vps-ssh-key -H sa@YOUT_SERVER_IP -f gcp.py setup
+(ball) ➜  ~ fab -i ~/.ssh/vps-ssh-key -H sa@YOUT_SERVER_IP -f gcp.py setup:port=10018,password=<Your Password>
 
 ```
 

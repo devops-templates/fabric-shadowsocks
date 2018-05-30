@@ -1,5 +1,4 @@
 #coding=utf-8
-import os
 import tempfile
 import json
 
@@ -12,31 +11,35 @@ services:
   shadowsocks:
     image: xiocode/shadowsocks-libev
     ports:
-      - {1}:8388/tcp
-      - {1}:8388/udp
+      - {0}:8388/tcp
+      - {0}:8388/udp
     environment:
-      - METHOD={2}
-      - PASSWORD={0}
+      - METHOD={1}
+      - PASSWORD={2}
       - OBFS_OPTS=obfs=http;obfs-host=www.bing.com
     restart: always
 """
 
-def install():
-    with cd('~'):
-        sudo("git clone https://github.com/devops-templates/docker-shadowsocks-libev.git /opt/shadowsocks")
+def install(port, password, method="aes-192-cfb"):
+    sudo("mkdir -p /opt/shadowsocks/user-%s" % port)
+    config(port, password, method)
+    up(username)
 
-def config(password="1234567890", port=10010, method="aes-192-cfb"):
-    remote_config_path = '/opt/shadowsocks/docker-compose.yml'
+def config(port, password, method="aes-192-cfb"):
+    remote_config_path = '/opt/shadowsocks/user-%s/docker-compose.yml' % port
     local_config_path = tempfile.mktemp('.yml')
-    conffile_content = docker_compose_config.format(password, port, method)
+    conffile_content = docker_compose_config.format(port, method, password)
     with open(local_config_path, 'w') as confile:
         confile.write(conffile_content)
 
     put(local_config_path, remote_config_path, use_sudo=True, mode="644")
 
-def up():
-    with cd('/opt/shadowsocks'):
+def up(port):
+    with cd('/opt/shadowsocks/user-%s' % port):
         sudo('docker-compose up -d')
 
+def restart(port):
+    with cd('/opt/shadowsocks/user-%s' % port):
+        sudo('docker-compose restart')
 
 

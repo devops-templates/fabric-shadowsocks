@@ -63,7 +63,7 @@ def install():
     sudo("apt install software-properties-common monit -y")
     sudo("add-apt-repository ppa:max-c-lv/shadowsocks-libev -y")
     sudo("apt-get update")
-    sudo("apt install shadowsocks-libevi -y")
+    sudo("apt install shadowsocks-libev -y")
 
 def config():
     for user in users:

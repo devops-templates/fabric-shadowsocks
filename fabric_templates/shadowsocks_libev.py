@@ -6,19 +6,18 @@ from fabric.api import *
 from fabric.contrib.files import *
 
 users = [
-        ("80","key")
-        ("443","key"),
-        ("8080","key"),
-        ("8081","key"),
-        ("8082","key"),
-        ("8083","key"),
-        ("8084","key"),
-        ("8085","key"),
-        ("8086","key"),
-        ("8087","key"),
-        ("8088","key"),
-        ("8089","key"),
-        ("8090","key")
+        ("8080","nopasswd"),
+        ("8081","nopasswd"),
+        ("8082","nopasswd"),
+        ("8083","nopasswd"),
+        ("8084","nopasswd"),
+        ("8085","nopasswd"),
+        ("8086","nopasswd"),
+        ("8087","nopasswd"),
+        ("8088","nopasswd"),
+        ("8089","nopasswd"),
+        ("8090","nopasswd"),
+        ("8988","nopasswd")
         ]
 
 method = "aes-256-cfb"
@@ -61,10 +60,10 @@ exit 0
 
 """
 def install():
-    sudo("apt install software-properties-common python monit -y")
+    sudo("apt install software-properties-common monit -y")
     sudo("add-apt-repository ppa:max-c-lv/shadowsocks-libev -y")
     sudo("apt-get update")
-    sudo("apt install shadowsocks-libev")
+    sudo("apt install shadowsocks-libevi -y")
 
 def config():
     for user in users:

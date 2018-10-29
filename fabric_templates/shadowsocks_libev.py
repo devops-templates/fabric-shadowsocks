@@ -66,6 +66,10 @@ def install():
     sudo("apt install shadowsocks-libev -y")
 
 def config():
+    # make monit auto start
+    sudo("systemctl enable monit")
+
+    # user config
     for user in users:
         (port, passwd) = user
         # mkdir

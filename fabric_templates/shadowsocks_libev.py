@@ -22,6 +22,20 @@ users = [
 
 method = "aes-256-cfb"
 
+monitrc = """
+set daemon 120
+set logfile /var/log/monit.log
+set idfile /var/lib/monit/id
+set statefile /var/lib/monit/state
+set eventqueue
+    basedir /var/lib/monit/events
+    slots 100
+set httpd port 2812 and
+    use address localhost
+    allow localhost
+    allow admin:monit
+include /etc/monit/conf.d/*
+"""
 
 monit="""check process user-{0} with pidfile /opt/shadowsocks/user-{0}/shadowsocks.pid
     start program = "/opt/shadowsocks/user-{0}/ssserver start"
@@ -67,6 +81,13 @@ def install():
     sudo("apt install shadowsocks-libev -y")
 
 def config():
+    # config monit
+    remote_monitrc = '/etc/monit/monitrc'
+    local_monitrc = tempfile.mktemp('.conf')
+    with open(local_monitrc, 'w') as f:
+        f.write(monitrc)
+    put(local_monitrc, remote_monitrc, use_sudo=True, mode="600")
+
     # make monit auto start
     sudo("systemctl enable monit")
 
@@ -99,4 +120,5 @@ def config():
         # make soft link
         sudo('ln -s %s/monit.conf /etc/monit/conf.d/user-%s.conf' % (workdir, port))
 
-
+def start():
+    sudo('monit reload')

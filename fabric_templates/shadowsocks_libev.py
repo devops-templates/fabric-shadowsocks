@@ -5,23 +5,6 @@ import tempfile
 from fabric.api import *
 from fabric.contrib.files import *
 
-users = [
-        ("8080","nopasswd"),
-        ("8081","nopasswd"),
-        ("8082","nopasswd"),
-        ("8083","nopasswd"),
-        ("8084","nopasswd"),
-        ("8085","nopasswd"),
-        ("8086","nopasswd"),
-        ("8087","nopasswd"),
-        ("8088","nopasswd"),
-        ("8089","nopasswd"),
-        ("8090","nopasswd"),
-        ("8988","nopasswd")
-        ]
-
-method = "aes-256-cfb"
-
 monitrc = """
 set daemon 120
 set logfile /var/log/monit.log
@@ -73,6 +56,8 @@ esac
 exit 0
 
 """
+
+
 def install():
     sudo("apt-get update")
     sudo("apt install software-properties-common monit -y")
@@ -80,20 +65,22 @@ def install():
     sudo("apt-get update")
     sudo("apt install shadowsocks-libev -y")
 
-def config():
+
+def config(ports='8080-8090', passwd='nopasswd', method="aes-256-cfb"):
     # config monit
     remote_monitrc = '/etc/monit/monitrc'
     local_monitrc = tempfile.mktemp('.conf')
     with open(local_monitrc, 'w') as f:
         f.write(monitrc)
     put(local_monitrc, remote_monitrc, use_sudo=True, mode="600")
+    sudo('chown root:root %s' % remote_monitrc)
 
     # make monit auto start
     sudo("systemctl enable monit")
 
     # user config
-    for user in users:
-        (port, passwd) = user
+    ports = ports.split('-')
+    for port in xrange(int(ports[0]), int(ports[1]) + 1):
         # mkdir
         workdir = '/opt/shadowsocks/user-%s' % port
         sudo('mkdir -p %s' % workdir)
@@ -120,5 +107,7 @@ def config():
         # make soft link
         sudo('ln -s %s/monit.conf /etc/monit/conf.d/user-%s.conf' % (workdir, port))
 
+
 def start():
     sudo('monit reload')
+

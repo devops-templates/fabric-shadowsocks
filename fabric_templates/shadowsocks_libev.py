@@ -60,6 +60,7 @@ exit 0
 
 """
 def install():
+    sudo("apt-get update")
     sudo("apt install software-properties-common monit -y")
     sudo("add-apt-repository ppa:max-c-lv/shadowsocks-libev -y")
     sudo("apt-get update")
@@ -91,6 +92,9 @@ def config():
         with open(local_monit, 'w') as f:
             f.write(content)
         put(local_monit, remote_monit, use_sudo=True, mode="644")
+
+        # clear solf link is exist
+        sudo('rm -f /etc/monit/conf.d/user-%s.conf' % (workdir, port))
 
         # make soft link
         sudo('ln -s %s/monit.conf /etc/monit/conf.d/user-%s.conf' % (workdir, port))

@@ -6,58 +6,41 @@ fabric templates for ubuntu 16.04
 
 Including:
 
-* ubuntu (only allow authkey to login)
+* docker_shadowsocks-libev
 * docker-ce
 * docker-compose
-* frp
-* kcptun
-* docker_shadowsocks-libev
+* shadowsocks-libev
 * bbr(x86_64)
-* grafana
-* telgraf
-* influxdb
+* ubuntu (only allow authkey to login)
 
 ## Usage
 
 ### Install fabric 
 
 ```
-pip install fabric
+pip install 'fabric<2.0'
 ```
 
-### [OPTION] Write a `fabfile.py`
 
-```
-from fabric_templates.kcptun import *
-```
-
-### Run the command via fabric
-```
-(ball) ➜  fabric-templates fab -l
-Available commands:
-
-    config
-    config_systemd
-    install
-    restart
-    start
-    stop
-
-# OR
-
-(ball) ➜  fabric-templates git:(master) ✗ fab -f fabric_templates/kcptun.py -l
-```
+## Using docker
 
 ### Install SS on GCP
 
 ```
-(ball) ➜  ~ fab -i ~/.ssh/vps-ssh-key -H sa@YOUT_SERVER_IP -f gcp.py setup:port=10018,password=<Your Password>
+fab -i ~/.ssh/vps-ssh-key -H sa@ip -f gcp.py setup:port=10018,password=<Your Password>
 
 ```
 
 ### Install SS on vulr
 
 ```
-(ball) ➜  ~ fab -H root@YOUT_SERVER_IP -f vulr.py setup
+fab -H sa@ip -f vulr.py setup
+
+```
+
+## Native
+
+```
+fab -H sa@ip -f fabric_templates/shadowsocks_libev.py install config:port=9000-9010<Plug>PeepOpenasswd=kingking,method=aes-192-cf start
 
 ```

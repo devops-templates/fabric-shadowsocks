@@ -41,6 +41,6 @@ fab -H sa@ip -f vulr.py setup
 ## Native
 
 ```
-fab -H sa@ip -f fabric_templates/shadowsocks_libev.py install config:port=9000-9010<Plug>PeepOpenasswd=kingking,method=aes-192-cf start
+fab -H sa@ip -f fabric_templates/shadowsocks_libev.py install config:ports=9000-9010,passwd=kingking,method=aes-192-cf start
 
 ```

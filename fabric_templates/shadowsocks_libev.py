@@ -68,7 +68,7 @@ def install():
 def provision():
     sudo('monit stop all')
     sudo('rm -f /etc/monit/conf.d/user-*.conf')
-    sudo('rm -f /opt/shadowsocks/user-*')
+    sudo('rm -rf /opt/shadowsocks/user-*')
 
 def config(ports='8080-8089', passwd='nopasswd', method="aes-256-cfb"):
     # config monit

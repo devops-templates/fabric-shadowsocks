@@ -15,7 +15,7 @@ Including:
 ### Install fabric 
 
 ```
-pyour_vps_ip install 'fabric<2.0'
+pip install 'fabric<2.0'
 ```
 
 ## Install

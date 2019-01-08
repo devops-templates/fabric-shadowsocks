@@ -1,46 +1,50 @@
-# fabric-templates
+# fabric-shadowsocks
 
-fabric templates for ubuntu 16.04
+shadowsocks fabric templates for ubuntu 16.04
 
 ## Templates
 
 Including:
 
-* docker_shadowsocks-libev
-* docker-ce
-* docker-compose
 * shadowsocks-libev
 * bbr(x86_64)
 * ubuntu (only allow authkey to login)
 
-## Usage
+## Urootge
 
 ### Install fabric 
 
 ```
-pip install 'fabric<2.0'
+pyour_vps_ip install 'fabric<2.0'
 ```
 
-## Native
+## Install
 
 ```
-fab -H sa@ip -f fabric_templates/shadowsocks_libev.py install config:ports=9000-9010,passwd=kingking,method=aes-192-cf start
-
-```
-
-## Using docker
-
-### Install SS on Google Cloud
-
-```
-fab -i ~/.ssh/vps-ssh-key -H sa@ip -f gcp.py setup:port=10018,password=<Your Password>
+fab -H root@your_vps_ip -f fabric_templates/shadowsocks_libev.py install config:ports=9000-9010,passwd=kingking,method=aes-192-cfb start
 
 ```
 
-### Install SS on vulr
+## Re-Config
+
 
 ```
-fab -H sa@ip -f vulr.py setup
+fab -H root@your_vps_ip -f fabric_templates/shadowsocks_libev.py provision config:ports=9000-9010,passwd=kingking,method=aes-192-cfb start
 
 ```
 
+## Install and Config  BBR
+
+```
+fab -H root@your_vps_ip -f fabric_templates/bbr.py upgrade_kernel
+
+# After reboot
+
+fab -H root@your_vps_ip -f fabric_templates/bbr.py config
+```
+
+## Enable IPv4 Only for apt
+
+```
+fab -H root@your_vps_ip -f fabric_templates/ubuntu.py apt_config
+```

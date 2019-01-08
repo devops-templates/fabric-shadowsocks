@@ -10,7 +10,7 @@ Including:
 * bbr(x86_64)
 * ubuntu (only allow authkey to login)
 
-## Urootge
+## Usage
 
 ### Install fabric 
 

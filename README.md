@@ -21,7 +21,11 @@ pip install 'fabric<2.0'
 ## Install
 
 ```
-fab -H root@your_vps_ip -f fabric_templates/shadowsocks_libev.py install config:ports=9000-9010,passwd=kingking,method=aes-192-cfb start
+fab -H root@your_vps_ip \
+-f fabric_templates/shadowsocks_libev.py \
+install \
+config:ports=9000-9010,passwd=kingking,method=aes-192-cfb \
+start
 
 ```
 
@@ -29,7 +33,11 @@ fab -H root@your_vps_ip -f fabric_templates/shadowsocks_libev.py install config:
 
 
 ```
-fab -H root@your_vps_ip -f fabric_templates/shadowsocks_libev.py provision config:ports=9000-9010,passwd=kingking,method=aes-192-cfb start
+fab -H root@your_vps_ip \
+-f fabric_templates/shadowsocks_libev.py \
+provision \
+config:ports=9000-9010,passwd=kingking,method=aes-192-cfb \
+start
 
 ```
 
